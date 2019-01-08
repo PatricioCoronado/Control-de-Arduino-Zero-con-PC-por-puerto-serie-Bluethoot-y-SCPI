@@ -1,12 +1,13 @@
 /*
 	Patricio Coronado
-	Proyecto:Pruebas con un módulo bluetooth HC-06  
+	Proyecto:Pruebas con un mÃ³dulo bluetooth HC-06  
 	Fichero:Prueba_HC-06.ino
+	Plataforma: Arduino Zero
 	27 de Noviembre de 2017  
 	Revisado el 29 de Mayo de 2018
 */
 #include <Arduino.h>
-#include "Prueba_HC-06_SCPI.h"// Menú SCPI del proyecto
+#include "Prueba_HC-06_SCPI.h"// MenÃº SCPI del proyecto
 // Variables del sistema
 /*
 1 set to 1200bps
@@ -18,50 +19,50 @@
 7 set to 57600bps
 8 set to 115200bps
 Enviando AT+BAUD4 pone el baudrate a 9600.
-Instalación en Windows 10
-En Windows 10, se agrega el dispositivo bluetooth con el pin 4321. El PC instala 2 puertos COM. El módulo bluetooth comunica con el primero;
+InstalaciÃ³n en Windows 10
+En Windows 10, se agrega el dispositivo bluetooth con el pin 4321. El PC instala 2 puertos COM. El mÃ³dulo bluetooth comunica con el primero;
 si son COM42 y COM43, comunica con el COM42. Con el programa Terminal B@yBray no funciona. Con Putty si, poniendo el protocolo a NONE.
 
 */
 //char VelocidadBT='4';//9600 Si es la primera vez que conecta el HC-06 hay que poner esta linea y no la siguiente
 char VelocidadBT='8';//115200
-char NombreBT[8]="BT_PCC1";//Nombre del módulo bluetooth
-//char pin[5]="1234"; //Pin anterior del módulo bluetooth
-char Pin[5]="4321"; //Pin del módulo bluetooth
+char NombreBT[8]="BT_PCC1";//Nombre del mÃ³dulo bluetooth
+//char pin[5]="1234"; //Pin anterior del mÃ³dulo bluetooth
+char Pin[5]="4321"; //Pin del mÃ³dulo bluetooth
 //
 void setup()
 {
   NOMBRE_DEL_SISTEMA_64B(Pruebas bluetooth con HC-06)
   pinMode(LED_BUILTIN,OUTPUT);
 
-// La configuración del módulo se hace una sola vez. En el proceso hay que flasearlo 2 veces con el código de
-// configuración habilitado. Una vez configurado se puede quitar el código de configuración
+// La configuraciÃ³n del mÃ³dulo se hace una sola vez. En el proceso hay que flasearlo 2 veces con el cÃ³digo de
+// configuraciÃ³n habilitado. Una vez configurado se puede quitar el cÃ³digo de configuraciÃ³n
 /* 
-// Inicio configuración del módulo bluetooth..........................................................................  
+// Inicio configuraciÃ³n del mÃ³dulo bluetooth..........................................................................  
 // Puerto hardware Serial1, con las salidas por el pin 0 y 1.
 // La primera vez se flasea el micro con:
 // Serial1.begin(9600);
-// Se configura el módulo con las siguientes lineas y finalmente se reabre el puerto con Serial1.begin(115200).
-// Ahora se flasea otra ver con esta linea a Serial1.begin(115200) y el módulo queda a 115200
+// Se configura el mÃ³dulo con las siguientes lineas y finalmente se reabre el puerto con Serial1.begin(115200).
+// Ahora se flasea otra ver con esta linea a Serial1.begin(115200) y el mÃ³dulo queda a 115200
   Serial1.begin(115200); 
-  // Configuración del dispositivo HC-06
+  // ConfiguraciÃ³n del dispositivo HC-06
   Serial1.print("AT");
   delay(1000);
-  //Cambia el nombre del módulo
+  //Cambia el nombre del mÃ³dulo
   Serial1.print("AT+NAME");
   Serial1.print(NombreBT);
   delay(1000);
-  //Cambia el pin del módulo
+  //Cambia el pin del mÃ³dulo
   Serial1.print("AT+PIN");
   Serial1.print(Pin);
   delay(1000);
-  // Cambia el baudrate del módulo
+  // Cambia el baudrate del mÃ³dulo
   Serial1.print("AT+BAUD");
   Serial1.print(VelocidadBT);
   delay(1000);
-//Fin configuración del módulo bluetooth..............................................................................
+//Fin configuraciÃ³n del mÃ³dulo bluetooth..............................................................................
 */
-  // Abre el puerto serie con el mismo baudrate del módulo
+  // Abre el puerto serie con el mismo baudrate del mÃ³dulo
   Serial1.begin(115200);
   delay(200);
 }
@@ -70,8 +71,8 @@ void loop()
 	if (Serial1.available()){/*delay(100);Espera a que el buffer se llene*/scpi();}
 }
 /*****************************************************************
-	Comando COMANDO1 ó C1
-	Ejecuta la función void fs1(void);
+	Comando COMANDO1 Ã³ C1
+	Ejecuta la funciÃ³n void fs1(void);
 *****************************************************************/
 void fs1(void)
 {
@@ -79,8 +80,8 @@ void fs1(void)
 	("Se ha recibido el COMANDO1 y se ha ejecutado la funcion fs1");
 }
 /*****************************************************************
-	Comando COMANDO2 ó C2
-	Ejecuta la función void fs1(void);
+	Comando COMANDO2 Ã³ C2
+	Ejecuta la funciÃ³n void fs1(void);
 *****************************************************************/
 void fs2(void)
 {
@@ -88,8 +89,8 @@ void fs2(void)
 	("Se ha recibido el COMANDO2 y se ha ejecutado la funcion fs2");
 }
 /****************************************************************
-	Comando SUBMENU1:COMANDO11 ó SM1:C11
-	Ejecuta la función void fs3(void);
+	Comando SUBMENU1:COMANDO11 Ã³ SM1:C11
+	Ejecuta la funciÃ³n void fs3(void);
 	Cambia el valor de la variable tipo double "Variable1"
 *****************************************************************/
 void fs3(void)
@@ -112,8 +113,8 @@ void fs3(void)
 	}
 }
 /*****************************************************************
-	Comando SUBMENU1:COMANDO11 ó SM1:C12
-	Ejecuta la función void fs4(void);
+	Comando SUBMENU1:COMANDO11 Ã³ SM1:C12
+	Ejecuta la funciÃ³n void fs4(void);
 	Cambia el valor de la variable tipo int "Variable2"
 *****************************************************************/
 void fs4(void)
